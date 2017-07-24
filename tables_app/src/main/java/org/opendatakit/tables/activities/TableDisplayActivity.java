@@ -30,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import org.opendatakit.consts.IntentConsts;
+import org.opendatakit.consts.RequestCodeConsts;
 import org.opendatakit.data.utilities.TableUtil;
 import org.opendatakit.database.data.UserTable;
 import org.opendatakit.database.service.DbHandle;
@@ -687,7 +688,7 @@ public class TableDisplayActivity extends AbsBaseWebActivity
             new ComponentName(IntentConsts.Sync.APPLICATION_NAME, IntentConsts.Sync.ACTIVITY_NAME));
         syncIntent.setAction(Intent.ACTION_DEFAULT);
         syncIntent.putExtras(bundle);
-        this.startActivityForResult(syncIntent, Constants.RequestCodes.LAUNCH_SYNC);
+        this.startActivityForResult(syncIntent, RequestCodeConsts.RequestCodes.LAUNCH_SYNC);
       } catch (ActivityNotFoundException e) {
         WebLogger.getLogger(getAppName()).printStackTrace(e);
         Toast.makeText(this, R.string.sync_not_found, Toast.LENGTH_LONG).show();
@@ -699,7 +700,7 @@ public class TableDisplayActivity extends AbsBaseWebActivity
           IntentConsts.AppProperties.ACTIVITY_NAME));
       preferenceIntent.setAction(Intent.ACTION_DEFAULT);
       preferenceIntent.putExtras(bundle);
-      this.startActivityForResult(preferenceIntent, Constants.RequestCodes.LAUNCH_DISPLAY_PREFS);
+      this.startActivityForResult(preferenceIntent, RequestCodeConsts.RequestCodes.LAUNCH_DISPLAY_PREFS);
       return true;
     default:
       return super.onOptionsItemSelected(item);
@@ -721,21 +722,21 @@ public class TableDisplayActivity extends AbsBaseWebActivity
     // for most returns, we just refresh the data set and redraw the page
     // for others, we need to take more intensive action
     switch (requestCode) {
-    case Constants.RequestCodes.ADD_ROW_SURVEY:
-    case Constants.RequestCodes.EDIT_ROW_SURVEY:
-      if (resultCode == Activity.RESULT_OK) {
-        WebLogger.getLogger(getAppName())
-            .d(TAG, "[onActivityResult] result ok, refreshing backing table");
-      } else {
-        WebLogger.getLogger(getAppName())
-            .d(TAG, "[onActivityResult] result canceled, refreshing backing table");
-      }
-      break;
-    case Constants.RequestCodes.LAUNCH_VIEW:
+    case RequestCodeConsts.RequestCodes.LAUNCH_VIEW:
       // if data is null then they never changed anything in the subactivity anyways
       if (data != null && data.hasExtra("props")) {
         props = data.getParcelableExtra("props");
         props.setActivity(this);
+      }
+      // This fallthrough is on purpose, we need to refresh because props (may have) changed
+    case RequestCodeConsts.RequestCodes.ADD_ROW_SURVEY:
+    case RequestCodeConsts.RequestCodes.EDIT_ROW_SURVEY:
+      try {
+        // verify that the data table doesn't contain checkpoints...
+        // always refresh, as table properties may have done something
+        refreshDataAndDisplayFragment();
+      } catch (IllegalStateException e) {
+        WebLogger.getLogger(getAppName()).printStackTrace(e);
       }
       break;
     }

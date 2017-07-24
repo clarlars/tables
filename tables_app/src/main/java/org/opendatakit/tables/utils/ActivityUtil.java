@@ -22,6 +22,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
+import org.opendatakit.consts.RequestCodeConsts;
 import org.opendatakit.data.ColorRuleGroup;
 import org.opendatakit.database.data.Row;
 import org.opendatakit.exception.ServicesAvailabilityException;
@@ -130,7 +131,7 @@ public class ActivityUtil {
   /**
    * Launch {@link TableLevelPreferencesActivity} to edit a table's properties.
    * Launches with request code
-   * {@link Constants.RequestCodes#LAUNCH_TABLE_PREFS}.
+   * {@link RequestCodeConsts.RequestCodes#LAUNCH_TABLE_PREFS}.
    *
    * @param activity              the activity to start
    * @param appName               the app name
@@ -145,13 +146,13 @@ public class ActivityUtil {
     IntentUtil.addTableIdToBundle(bundle, tableId);
     IntentUtil.addTablePreferenceFragmentTypeToBundle(bundle, fragmentTypeToDisplay);
     intent.putExtras(bundle);
-    activity.startActivityForResult(intent, Constants.RequestCodes.LAUNCH_TABLE_PREFS);
+    activity.startActivityForResult(intent, RequestCodeConsts.RequestCodes.LAUNCH_TABLE_PREFS);
   }
 
   /**
    * Launch {@link TableLevelPreferencesActivity} to edit a column's list of
    * color rules. Launches with request code
-   * {@link Constants.RequestCodes#LAUNCH_COLOR_RULE_LIST}.
+   * {@link RequestCodeConsts.RequestCodes#LAUNCH_COLOR_RULE_LIST}.
    *
    * @param activity   the activity to launch
    * @param appName    the app name
@@ -169,12 +170,12 @@ public class ActivityUtil {
     IntentUtil.addElementKeyToBundle(extras, elementKey);
     IntentUtil.addColorRuleGroupTypeToBundle(extras, ColorRuleGroup.Type.COLUMN);
     intent.putExtras(extras);
-    activity.startActivityForResult(intent, Constants.RequestCodes.LAUNCH_COLOR_RULE_LIST);
+    activity.startActivityForResult(intent, RequestCodeConsts.RequestCodes.LAUNCH_COLOR_RULE_LIST);
   }
 
   /**
    * Launch {@link TableLevelPreferencesActivity} to edit a column's preferences. Launches with
-   * request code {@link Constants.RequestCodes#LAUNCH_COLUMN_PREFS}.
+   * request code {@link RequestCodeConsts.RequestCodes#LAUNCH_COLUMN_PREFS}.
    *
    * @param activity   the activity to launch
    * @param appName    the app name
@@ -191,7 +192,7 @@ public class ActivityUtil {
     IntentUtil.addTableIdToBundle(extras, tableId);
     IntentUtil.addElementKeyToBundle(extras, elementKey);
     intent.putExtras(extras);
-    activity.startActivityForResult(intent, Constants.RequestCodes.LAUNCH_COLOR_RULE_LIST);
+    activity.startActivityForResult(intent, RequestCodeConsts.RequestCodes.LAUNCH_COLOR_RULE_LIST);
   }
 
   /**

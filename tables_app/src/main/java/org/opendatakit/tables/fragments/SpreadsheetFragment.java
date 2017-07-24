@@ -27,6 +27,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.opendatakit.activities.BaseActivity;
+import org.opendatakit.consts.RequestCodeConsts;
 import org.opendatakit.data.JoinColumn;
 import org.opendatakit.data.utilities.ColumnUtil;
 import org.opendatakit.database.data.ColumnDefinition;
@@ -326,7 +328,7 @@ public class SpreadsheetFragment extends AbsTableDisplayFragment
     // This tells it to get props from the intent
     extras.putString(Constants.IntentKeys.CONTAINS_PROPS, "");
     intent.putExtras(extras);
-    getActivity().startActivityForResult(intent, Constants.RequestCodes.LAUNCH_VIEW);
+    getActivity().startActivityForResult(intent, RequestCodeConsts.RequestCodes.LAUNCH_VIEW);
   }
 
   /**
@@ -506,7 +508,7 @@ public class SpreadsheetFragment extends AbsTableDisplayFragment
             // Do not pass inCollection because that will set groupBy to null in TableDispAct
             extras.putString(Constants.IntentKeys.CONTAINS_PROPS, "");
             intent.putExtras(extras);
-            getActivity().startActivityForResult(intent, Constants.RequestCodes.LAUNCH_VIEW);
+            getActivity().startActivityForResult(intent, RequestCodeConsts.RequestCodes.LAUNCH_VIEW);
           }
         }
       } catch (ServicesAvailabilityException e) {
