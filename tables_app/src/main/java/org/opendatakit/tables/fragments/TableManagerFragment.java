@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.opendatakit.consts.IntentConsts;
+import org.opendatakit.consts.RequestCodeConsts;
 import org.opendatakit.data.utilities.TableUtil;
 import org.opendatakit.database.service.DbHandle;
 import org.opendatakit.database.service.UserDbInterface;
@@ -176,7 +177,7 @@ public class TableManagerFragment extends ListFragment implements DatabaseConnec
       intent.putExtra(IntentConsts.INTENT_KEY_TABLE_ID, tableId);
       ComponentName componentName = new ComponentName(baseActivity, TableDisplayActivity.class);
       intent.setComponent(componentName);
-      startActivityForResult(intent, Constants.RequestCodes.DISPLAY_VIEW);
+      startActivityForResult(intent, RequestCodeConsts.RequestCodes.DISPLAY_VIEW);
     }
   }
 

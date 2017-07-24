@@ -25,6 +25,9 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.view.ContextMenu;
 import android.widget.Toast;
+import org.opendatakit.activities.BaseActivity;
+import org.opendatakit.activities.IAppAwareActivity;
+import org.opendatakit.consts.RequestCodeConsts;
 import org.opendatakit.data.ColorRuleGroup;
 import org.opendatakit.data.TableViewType;
 import org.opendatakit.data.utilities.TableUtil;
@@ -144,7 +147,7 @@ public class TablePreferenceFragment extends AbsTableLevelPreferenceFragment
     //WebLogger.getLogger(getAppName()).i(TAG, String.format(Locale.getDefault(), "%d", requestCode));
 
     switch (requestCode) {
-    case Constants.RequestCodes.CHOOSE_LIST_FILE:
+    case RequestCodeConsts.RequestCodes.CHOOSE_LIST_FILE:
       if (data != null) {
         try {
           fullPath = getFullPathFromIntent(data);
@@ -161,7 +164,7 @@ public class TablePreferenceFragment extends AbsTableLevelPreferenceFragment
         }
       }
       break;
-    case Constants.RequestCodes.CHOOSE_DETAIL_FILE:
+    case RequestCodeConsts.RequestCodes.CHOOSE_DETAIL_FILE:
       if (data != null) {
         try {
           fullPath = getFullPathFromIntent(data);
@@ -175,7 +178,7 @@ public class TablePreferenceFragment extends AbsTableLevelPreferenceFragment
         }
       }
       break;
-    case Constants.RequestCodes.CHOOSE_MAP_FILE:
+    case RequestCodeConsts.RequestCodes.CHOOSE_MAP_FILE:
       if (data != null) {
         try {
           fullPath = getFullPathFromIntent(data);
@@ -410,8 +413,8 @@ public class TablePreferenceFragment extends AbsTableLevelPreferenceFragment
   private void initializeListFile(DbHandle db) throws ServicesAvailabilityException {
     FileSelectorPreference listPref = (FileSelectorPreference) this
         .findPreference(Constants.PreferenceKeys.Table.LIST_FILE);
-    listPref.setFields(this, Constants.RequestCodes.CHOOSE_LIST_FILE,
-        ((AbsBaseActivity) getActivity()).getAppName());
+    listPref.setFields(this, RequestCodeConsts.RequestCodes.CHOOSE_LIST_FILE,
+        ((IAppAwareActivity) getActivity()).getAppName());
     listPref.setSummary(TableUtil.get()
         .getListViewFilename(Tables.getInstance().getDatabase(), getAppName(), db, getTableId()));
   }
@@ -425,8 +428,8 @@ public class TablePreferenceFragment extends AbsTableLevelPreferenceFragment
   private void initializeMapListFile(DbHandle db) throws ServicesAvailabilityException {
     FileSelectorPreference mapListPref = (FileSelectorPreference) this
         .findPreference(Constants.PreferenceKeys.Table.MAP_LIST_FILE);
-    mapListPref.setFields(this, Constants.RequestCodes.CHOOSE_MAP_FILE,
-        ((AbsBaseActivity) getActivity()).getAppName());
+    mapListPref.setFields(this, RequestCodeConsts.RequestCodes.CHOOSE_MAP_FILE,
+        ((IAppAwareActivity) getActivity()).getAppName());
     String mapListViewFileName = TableUtil.get()
         .getMapListViewFilename(Tables.getInstance().getDatabase(), getAppName(), db, getTableId());
     WebLogger.getLogger(getAppName())
@@ -443,8 +446,8 @@ public class TablePreferenceFragment extends AbsTableLevelPreferenceFragment
   private void initializeDetailFile(DbHandle db) throws ServicesAvailabilityException {
     FileSelectorPreference detailPref = (FileSelectorPreference) this
         .findPreference(Constants.PreferenceKeys.Table.DETAIL_FILE);
-    detailPref.setFields(this, Constants.RequestCodes.CHOOSE_DETAIL_FILE,
-        ((AbsBaseActivity) getActivity()).getAppName());
+    detailPref.setFields(this, RequestCodeConsts.RequestCodes.CHOOSE_DETAIL_FILE,
+        ((IAppAwareActivity) getActivity()).getAppName());
     detailPref.setSummary(TableUtil.get()
         .getDetailViewFilename(Tables.getInstance().getDatabase(), getAppName(), db, getTableId()));
   }

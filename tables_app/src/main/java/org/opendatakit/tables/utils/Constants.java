@@ -193,44 +193,6 @@ public class Constants {
   }
 
   /**
-   * Request codes, used with startActivityForResult
-   */
-  public static final class RequestCodes {
-    /**
-     * Used to view a collection or a join table in a SpreadsheetFragment in
-     * TableDisplayActivity
-     */
-    public static final int DISPLAY_VIEW = 1;
-    public static final int CHOOSE_DETAIL_FILE = 2;
-    public static final int CHOOSE_LIST_FILE = 3;
-    public static final int CHOOSE_MAP_FILE = 4;
-    /**
-     * A generic code for now. Can refactor to make more specific if needed.
-     */
-    public static final int LAUNCH_VIEW = 5;
-    public static final int LAUNCH_DISPLAY_PREFS = 6;
-    public static final int LAUNCH_IMPORT = 7;
-    public static final int LAUNCH_SYNC = 8;
-    public static final int LAUNCH_TABLE_MANAGER = 9;
-    /**
-     * For launching an HTML file not associated with a table.
-     */
-    public static final int LAUNCH_WEB_VIEW = 10;
-    /**
-     * For launching an intent to edit a table's properties.
-     */
-    public static final int LAUNCH_TABLE_PREFS = 11;
-    public static final int LAUNCH_COLOR_RULE_LIST = 16;
-    public static final int ADD_ROW_SURVEY = 17;
-    public static final int EDIT_ROW_SURVEY = 18;
-    public static final int LAUNCH_CHECKPOINT_RESOLVER = 19;
-    public static final int LAUNCH_CONFLICT_RESOLVER = 20;
-    public static final int LAUNCH_EXPORT = 21;
-    public static final int LAUNCH_DOACTION = 22;
-    public static final int LAUNCH_COLUMN_PREFS = 23;
-  }
-
-  /**
    * The names of the JavaScript interfaces that are attached to the window
    * object.
    *
