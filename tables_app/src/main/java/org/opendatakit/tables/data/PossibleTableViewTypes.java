@@ -42,7 +42,7 @@ public class PossibleTableViewTypes {
   private boolean mMapIsValid;
   private String mMapListFileName;
 
-  private TableDisplayActivity.ViewFragmentType mDefaultViewType;
+  private ViewFragmentType mDefaultViewType;
   private String mDetailFileName;
 
   public PossibleTableViewTypes(String appName, DbHandle db, String tableId,
@@ -53,19 +53,19 @@ public class PossibleTableViewTypes {
     if (defaultViewType != null) {
       switch (defaultViewType) {
       case SPREADSHEET:
-        mDefaultViewType = TableDisplayActivity.ViewFragmentType.SPREADSHEET;
+        mDefaultViewType = ViewFragmentType.SPREADSHEET;
         break;
       case MAP:
-        mDefaultViewType = TableDisplayActivity.ViewFragmentType.MAP;
+        mDefaultViewType = ViewFragmentType.MAP;
         break;
       case LIST:
-        mDefaultViewType = TableDisplayActivity.ViewFragmentType.LIST;
+        mDefaultViewType = ViewFragmentType.LIST;
         break;
       default:
         mDefaultViewType = TableDisplayActivity.ViewFragmentType.SPREADSHEET;
       }
     } else {
-      mDefaultViewType = TableDisplayActivity.ViewFragmentType.SPREADSHEET;
+      mDefaultViewType = ViewFragmentType.SPREADSHEET;
     }
 
     mSpreadsheetIsValid = true; // always
@@ -101,7 +101,7 @@ public class PossibleTableViewTypes {
   /**
    * @return the default view type for this table
    */
-  public TableDisplayActivity.ViewFragmentType getDefaultViewType() {
+  public ViewFragmentType getDefaultViewType() {
     return mDefaultViewType;
   }
 

@@ -40,6 +40,7 @@ import org.opendatakit.logging.WebLogger;
 import org.opendatakit.tables.R;
 import org.opendatakit.tables.application.Tables;
 import org.opendatakit.tables.data.PossibleTableViewTypes;
+import org.opendatakit.tables.data.ViewFragmentType;
 import org.opendatakit.tables.fragments.*;
 import org.opendatakit.tables.fragments.TableMapInnerFragment.TableMapInnerFragmentListener;
 import org.opendatakit.tables.utils.ActivityUtil;
@@ -1167,13 +1168,36 @@ public class TableDisplayActivity extends AbsBaseWebActivity
   public void initializationCompleted() {
   }
 
-  /**
-   * The fragment types this activity could be displaying.
-   *
-   * @author sudar.sam@gmail.com
-   */
-  public enum ViewFragmentType {
-    SPREADSHEET, LIST, MAP, DETAIL, DETAIL_WITH_LIST, SUB_LIST
+  private void removeAllFragments() {
+    FragmentManager fragmentManager = this.getFragmentManager();
+    FragmentTransaction fragmentTransaction = null;
+    // First acquire all the possible fragments.
+    Fragment spreadsheetFragment = fragmentManager
+        .findFragmentByTag(ViewFragmentType.SPREADSHEET.name());
+    Fragment listViewFragment = fragmentManager.findFragmentByTag(ViewFragmentType.LIST.name());
+    Fragment mapListViewFragment = fragmentManager
+        .findFragmentByTag(Constants.FragmentTags.MAP_LIST);
+    Fragment innerMapFragment = fragmentManager
+        .findFragmentByTag(Constants.FragmentTags.MAP_INNER_MAP);
+    Fragment detailViewFragment = fragmentManager.findFragmentByTag(ViewFragmentType.DETAIL.name());
+    Fragment detailWithListViewDetailFragment = fragmentManager
+        .findFragmentByTag(Constants.FragmentTags.DETAIL_WITH_LIST_DETAIL);
+    Fragment detailWithListViewListFragment = fragmentManager
+        .findFragmentByTag(Constants.FragmentTags.DETAIL_WITH_LIST_LIST);
+
+    for (Fragment f : new Fragment[] { spreadsheetFragment, listViewFragment, mapListViewFragment,
+        innerMapFragment, detailViewFragment, detailWithListViewDetailFragment,
+        detailWithListViewListFragment }) {
+      if (f != null) {
+        if (fragmentTransaction == null) {
+          fragmentTransaction = fragmentManager.beginTransaction();
+        }
+        fragmentTransaction.remove(f);
+      }
+    }
+    if (fragmentTransaction != null) {
+      fragmentTransaction.commit();
+    }
   }
 
 }
